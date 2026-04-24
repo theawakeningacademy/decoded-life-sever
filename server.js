@@ -59,7 +59,7 @@ app.post("/chat", async function(req, res) {
         "x-api-key": process.env.ANTHROPIC_API_KEY,
         "anthropic-version": "2023-06-01"
       },
-      body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1400, system: sys, messages: messages })
+      body: JSON.stringify({ model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-6", max_tokens: 1400, system: sys, messages: messages })
     });
     var d = await r.json();
     if (!r.ok) return res.status(r.status).json({ error: d });
